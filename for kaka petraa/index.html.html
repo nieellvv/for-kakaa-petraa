@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Website Bucin - Micola Arighi 💖</title>
+    <style>
+      body {
+        background-image: url(https://img.freepik.com/premium-photo/defocused-lights-form-heart-black-background_607094-211.jpg);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+      }
+
+      /* Efek animasi hati melayang */
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+    </style>
+
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+
+  <body class="justify-center flex relative">
+    <!-- Musik romantis -->
+    <audio id="bg-music" autoplay loop>
+      <source
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        type="mp3"
+      />
+    </audio>
+
+    <main
+      class="bg-white rounded mt-24 p-8 shadow-lg shadow-red-200 animate__animated animate__backInDown"
+    >
+      <img
+        class="cat-img mx-auto"
+        src="https://media.tenor.com/cofRHcGGOfoAAAAi/shy-cute.gif"
+        alt="Cute cat"
+        width="200"
+      />
+      <div class="border-b mt-2 border-2"></div>
+      <div class="lh-1 text-center mt-4">
+        <h2 class="title text-red-400 text-xl font-semibold">
+          Haiiiii kakaaaaa,
+        </h2>
+        <p class="title question fs-1 text-2xl font-bold text-gray-700">
+          Mau ngedate?
+        </p>
+      </div>
+      <div class="buttons mt-5 flex justify-around">
+        <button
+          type="button"
+          class="btn-yes bg-green-500 rounded text-white text-3xl px-3 pt-1 pb-2 animate__pulse animate__animated animate__infinite"
+        >
+          yes
+        </button>
+        <button
+          type="button"
+          class="btn-no bg-red-500 rounded text-white text-2xl px-3 pt-1 pb-2"
+        >
+          no
+        </button>
+      </div>
+      <div class="numbers hidden mt-5 flex justify-center">
+        <a
+          href="https://maps.app.goo.gl/Ku15BYCBB9BoHiPd9"
+          type="button"
+          class="bg-green-500 text-white py-1 px-3 rounded btn-yes w-100 text-xl font-bold"
+        >
+          Siniiiiii maa dedeeee 💕
+        </a>
+      </div>
+
+      <!-- Pesan Rahasia -->
+      <div
+        id="love-message"
+        class="hidden text-center text-2xl text-pink-600 font-bold mt-6 animate__animated animate__fadeInUp"
+      >
+       luppp uuuuuu<3 ❤️
+      </div>
+    </main>
+
+    <!-- Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+      const title = document.querySelector(".title");
+      const question = document.querySelector(".question");
+      const buttonsContainer = document.querySelector(".buttons");
+      const numberContainer = document.querySelector(".numbers");
+      const yesButton = document.querySelector(".btn-yes");
+      const noButton = document.querySelector(".btn-no");
+      const catImg = document.querySelector(".cat-img");
+
+      const MAX_IMAGES = 5;
+      let count = 0;
+      let play = true;
+
+      const listGambar = [
+        "https://media1.tenor.com/m/BbSkyx3DaEgAAAAd/goma-sad.gif",
+        "https://media.tenor.com/M9WbqMQ2ISwAAAAi/annoyed.gif",
+        "https://i.pinimg.com/originals/96/43/2e/96432e7570c1d014a84085379ba369d7.gif",
+        "https://i.pinimg.com/originals/e1/64/7b/e1647b7fd330918520b12076a8a2dfcd.gif",
+        "https://media1.tenor.com/m/M_5Qg9ok3HQAAAAC/cat-pout.gif",
+        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW9temgzcjlieHJtOXM2YXhoeW94N2k2c3ljcmtpYTZ4NnBicm0ybyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f9EmXxglhdhAj1bo28/giphy.webp",
+      ];
+
+      const messages = ["no", "hmm?", "yakin?", "klik yes", "huftt..", "<--"];
+
+      noButton.addEventListener("click", () => {
+        title.classList.add("hidden");
+        question.classList.add("hidden");
+        if (play) {
+          count++;
+          catImg.src = listGambar[Math.min(count, MAX_IMAGES) - 1];
+          noButton.innerHTML = messages[Math.min(count, messages.length - 1)];
+          if (count === MAX_IMAGES) play = false;
+        }
+      });
+
+      yesButton.addEventListener("click", () => {
+        buttonsContainer.classList.add("hidden");
+        title.classList.add("hidden");
+        question.classList.add("hidden");
+        numberContainer.classList.remove("hidden");
+        catImg.src = listGambar[5];
+        document.getElementById("love-message").classList.remove("hidden");
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.6 },
+        });
+      });
+
+    
+
+      // Efek hati melayang tiap 0.8 detik
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0px";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        heart.style.opacity = "0.12";
+        heart.style.animation = "floatUp 3s linear forwards";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+      setInterval(createHeart, 800);
+    </script>
+  </body>
+</html>
